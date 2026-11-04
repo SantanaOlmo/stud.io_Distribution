@@ -1,0 +1,1 @@
+import{t as e}from"./react-C1iE8mnY.js";import{t}from"./Tooltip-Da5B42r6.js";var n=e(),r={folder:`Carpeta`,pdf:`PDF`,markdown:`Markdown`,documents:`Documentos`,exam:`Test`,law:`Artículo`,tag:`Colección`,group:`Grupo`,personFilled:`Grupo`,public:`Público`,pin:`Fijado`};function i({label:e,children:r}){return(0,n.jsx)(t,{label:e,side:`top`,children:r})}export{i as n,r as t};

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/stud.io_Distribution/favicon.svg" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#12181e" />
+    <meta
+      name="description"
+      content="estud.io — memoriza textos palabra por palabra, sin conexión."
+    />
+    <link rel="apple-touch-icon" href="/stud.io_Distribution/icons/icon-book-192.png" />
+    <title>estud.io</title>
+    <!--
+      Shell mínimo inline: FCP no debe esperar al CSS/JS de Vite.
+      React sustituye #root al montar.
+    -->
+    <style>html,body{color:#c8d0d8;background:#12181e;min-height:100%;margin:0;font-family:system-ui,Segoe UI,sans-serif}#boot,.boot-lcp{padding:calc(2.5rem + env(safe-area-inset-top,0px)) 1.25rem 0;letter-spacing:-.04em;margin:0;font-size:clamp(2.8rem,11vw,3.6rem);font-weight:800;line-height:1}</style>
+    <script type="module" crossorigin src="/stud.io_Distribution/assets/index-DNBUTx9e.js"></script>
+    <link rel="modulepreload" crossorigin href="/stud.io_Distribution/assets/rolldown-runtime-XKyaHtl9.js">
+    <link rel="modulepreload" crossorigin href="/stud.io_Distribution/assets/react-C1iE8mnY.js">
+    <link rel="stylesheet" crossorigin href="/stud.io_Distribution/assets/index-CZpEYRWH.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" crossorigin href="/stud.io_Distribution/assets/index-CZpEYRWH.css"></noscript>
+  <link rel="manifest" href="/stud.io_Distribution/manifest.webmanifest"></head>
+  <body>
+    <script>
+      try {
+        var dark = localStorage.getItem('estud.io:theme') === 'dark'
+        var wallpaperOn =
+          localStorage.getItem('estud.io:wallpaper-active') === '1'
+        var chrome = wallpaperOn ? '#000000' : dark ? '#12181e' : '#dbdbdb'
+        var ink = wallpaperOn || dark ? '#c8d0d8' : '#1a1f24'
+        if (dark) document.documentElement.setAttribute('data-theme', 'dark')
+        if (wallpaperOn)
+          document.documentElement.classList.add('has-wallpaper')
+        document.documentElement.style.backgroundColor = chrome
+        document.body.style.backgroundColor = chrome
+        document.body.style.color = ink
+        var m = document.querySelector('meta[name="theme-color"]')
+        if (m) m.setAttribute('content', chrome)
+      } catch (e) {}
+    </script>
+    <div id="root"><p id="boot">estud.io</p></div>
+  </body>
+</html>

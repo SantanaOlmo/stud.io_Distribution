@@ -1,0 +1,1 @@
+function e(e,t,n){let r=new Date(e.submittedAt).getTime(),i=e.startedAt;return i||(n>0&&(i=t.answers[n-1]?.submittedAt),i??=t.startedAt),Math.max(0,r-new Date(i).getTime())}export{e as t};
