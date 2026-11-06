@@ -1,0 +1,1 @@
+import{a as e}from"./database-GjVb-yhy.js";import{r as t}from"./queue-_NmMwz4V.js";async function n(){return e()}async function r(e,r=`upsert`){await t(await n(),`quiz`,e,r)}async function i(e,r=`upsert`){await t(await n(),`question`,e,r)}async function a(e,r=`upsert`){await t(await n(),`document`,e,r)}export{n as i,i as n,r,a as t};

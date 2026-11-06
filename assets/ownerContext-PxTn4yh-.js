@@ -1,0 +1,1 @@
+import{a as e}from"./database-GjVb-yhy.js";async function t(){return e()}export{t};

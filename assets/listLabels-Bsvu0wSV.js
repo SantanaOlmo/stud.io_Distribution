@@ -1,0 +1,1 @@
+import{i as e}from"./types-CB64KblQ.js";function t(e){return`${e} ${e===1?`pregunta`:`preguntas`}`}function n(t){return e(t)?`Markdown`:t.pageCount<=0?`PDF`:`${t.pageCount} ${t.pageCount===1?`página`:`páginas`}`}export{t as n,n as t};

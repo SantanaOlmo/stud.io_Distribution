@@ -1,0 +1,6 @@
+app=estud.io
+version=1.10.834
+source_sha=8f78cb510a4d2716ffd2b301f48e42b6b8576c2b
+source_repo=SantanaOlmo/stud.io
+built_at=2026-11-06T22:13:13Z
+base_path=/stud.io_Distribution/

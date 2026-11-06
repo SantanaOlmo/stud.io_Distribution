@@ -1,0 +1,1 @@
+function e(e=``){let t=typeof crypto<`u`&&`randomUUID`in crypto?crypto.randomUUID():`${Date.now()}-${Math.random().toString(36).slice(2,11)}`;return e?`${e}_${t}`:t}export{e as t};

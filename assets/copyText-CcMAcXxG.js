@@ -1,0 +1,1 @@
+import{n as e}from"./appToast-D-QY0k4Y.js";async function t(t,n=`Copiado.`){try{return await navigator.clipboard.writeText(t),e({message:n,icon:`copy`}),!0}catch{return e({message:`No se pudo copiar.`,icon:`copy`,variant:`error`}),!1}}export{t};
