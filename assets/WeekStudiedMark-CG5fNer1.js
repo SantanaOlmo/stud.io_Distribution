@@ -1,0 +1,1 @@
+import{t as e}from"./react-C1iE8mnY.js";import{t}from"./Icon-C6XsCl4c.js";var n=e();function r({label:e=`Hecho esta semana`,className:r=``}){return(0,n.jsx)(`span`,{className:[`week-studied-mark`,r].filter(Boolean).join(` `),title:e,"aria-label":e,children:(0,n.jsx)(t,{name:`check`,className:`week-studied-mark__icon`})})}export{r as t};

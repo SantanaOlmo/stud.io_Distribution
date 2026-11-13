@@ -1,0 +1,1 @@
+function e(e,t){let n=e.normalize(`NFC`);return t.accentsSensitive||(n=n.replace(/ñ/g,``).replace(/Ñ/g,``).normalize(`NFD`).replace(/\p{M}/gu,``).normalize(`NFC`).replace(RegExp(``,`g`),`ñ`).replace(RegExp(``,`g`),`Ñ`)),t.caseSensitive||(n=n.toLocaleLowerCase(`es`)),n}function t(e){return e.replace(/\s+/g,` `).trim()}export{e as n,t};

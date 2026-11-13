@@ -1,0 +1,1 @@
+import{a as e}from"./database-vHexBQtU.js";async function t(){return e()}export{t};

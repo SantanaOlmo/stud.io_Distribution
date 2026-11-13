@@ -1,0 +1,1 @@
+var e=new Set,t=new Set;function n(t){return e.add(t),()=>{e.delete(t)}}function r(e){return t.add(e),()=>{t.delete(e)}}function i(){for(let e of t){let t=e();if(t.dirty)return t}return{dirty:!1}}async function a(){let t=[...e].map(async e=>{await e()});await Promise.all(t)}export{n as i,i as n,r,a as t};
