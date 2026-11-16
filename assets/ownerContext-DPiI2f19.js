@@ -1,0 +1,1 @@
+import{a as e}from"./database-Bkv0EPlx.js";async function t(){return e()}export{t};

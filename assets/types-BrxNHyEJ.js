@@ -1,0 +1,1 @@
+function e(e){let t=e.myRole;if(!t)return!1;let n=t===`owner`||t===`admin`,r=e.inviteAdminsOnly!==!1;return n||!r}export{e as t};

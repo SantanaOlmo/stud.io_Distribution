@@ -1,0 +1,1 @@
+function e(e){if(e.folderIds&&e.folderIds.length>0){let t=new Set(e.folderIds);return t.add(e.folderId),[...t]}return[e.folderId]}function t(t,n){return e(t).includes(n)}function n(e,t,n){let r=new Set(t?.length?t:[e]);return r.add(e),r.add(n),[...r]}export{e as n,n as r,t};

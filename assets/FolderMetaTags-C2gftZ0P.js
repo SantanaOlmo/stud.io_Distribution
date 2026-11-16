@@ -1,0 +1,1 @@
+function e(e){if(!e?.length)return``;let t=e.map(e=>e.trim()).filter(Boolean);return t.length===0?``:` · ${t.join(` · `)}`}export{e as t};

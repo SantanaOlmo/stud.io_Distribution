@@ -1,0 +1,1 @@
+var e=`estud-io:toast`;function t(t){window.dispatchEvent(new CustomEvent(e,{detail:t}))}export{t as n,e as t};

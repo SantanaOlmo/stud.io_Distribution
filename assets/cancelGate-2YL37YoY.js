@@ -1,0 +1,1 @@
+function e(){let e=!1;return{isCancelled:()=>e,cancel:()=>{e=!0}}}async function t(e,t){for(let n of t)if(e.isCancelled()||(await n(),e.isCancelled()))return`cancelled`;return`completed`}export{t as n,e as t};

@@ -1,0 +1,1 @@
+import{t as e}from"./react-C1iE8mnY.js";var t=e();function n({title:e,description:n,action:r,variant:i=`default`}){return(0,t.jsxs)(`div`,{className:i===`plain`?`empty-state empty-state--plain`:`empty-state`,role:`status`,children:[(0,t.jsx)(`h2`,{children:e}),(0,t.jsx)(`p`,{children:n}),r]})}export{n as t};

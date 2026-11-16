@@ -1,0 +1,1 @@
+var e=`gym:open-import`;function t(){window.dispatchEvent(new CustomEvent(e))}function n(t){return window.addEventListener(e,t),()=>window.removeEventListener(e,t)}export{t as openGymPackImport,n as subscribeGymPackImportOpen};

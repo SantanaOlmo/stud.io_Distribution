@@ -1,0 +1,1 @@
+import{n as e}from"./rolldown-runtime-XKyaHtl9.js";import{a as t,i as n,r}from"./config-XtvWqM3M.js";import{t as i}from"./supabase-Bwm3Z89P.js";var a=e({supabase:()=>o}),o=t()?i(n(),r(),{auth:{persistSession:!0,autoRefreshToken:!0,detectSessionInUrl:!0,flowType:`pkce`}}):null;export{o as n,a as t};
