@@ -1,0 +1,1 @@
+function e(e){let t=Number.isFinite(e)?Math.max(0,Math.floor(e)):0;return t===1?`1 persona`:`${t} personas`}export{e as t};

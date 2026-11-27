@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/stud.io_Distribution/favicon.svg" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#12181e" />
+    <meta
+      name="description"
+      content="estud.io — memoriza textos palabra por palabra, sin conexión."
+    />
+    <link rel="apple-touch-icon" href="/stud.io_Distribution/icons/icon-book-192.png" />
+    <title>estud.io</title>
+    <!--
+      Antes de cualquier module/SW: si un chunk hasheado 404 (deploy),
+      desregistrar SW + limpiar caché + recargar. Sin esto, main.tsx
+      no llega a ejecutarse y la UI se queda pillada hasta Ctrl+Shift+R.
+    -->
+    <script>
+      (function () {
+        /* Claves alineadas con src/pwa/recoveryContract.ts */
+        var HARD_KEY = 'estud.io:boot-hard-reload'
+        var CTRL_KEY = 'estud.io:boot-ctrl-reload'
+        var CHUNK_ERROR_RE=/Failed to fetch dynamically imported module|Loading chunk [\w-]+ failed|Importing a module script failed|error loading dynamically imported module|Unable to preload CSS|error while loading|Load failed|Loading chunk|Unable to preload/i;
+
+        function hardReload() {
+          try {
+            if (sessionStorage.getItem(HARD_KEY) === '1') return
+            sessionStorage.setItem(HARD_KEY, '1')
+          } catch (e) {}
+          var go = function () {
+            try {
+              var u = new URL(location.href)
+              u.searchParams.set('_pwa_reload', String(Date.now()))
+              u.searchParams.delete('_pwa_bust')
+              location.replace(u.href)
+            } catch (err) {
+              location.reload()
+            }
+          }
+          var jobs = []
+          if ('caches' in window) {
+            jobs.push(
+              caches.keys().then(function (keys) {
+                return Promise.all(keys.map(function (k) {
+                  return caches.delete(k)
+                }))
+              }),
+            )
+          }
+          if ('serviceWorker' in navigator) {
+            jobs.push(
+              navigator.serviceWorker.getRegistrations().then(function (regs) {
+                return Promise.all(
+                  regs.map(function (r) {
+                    return r.unregister()
+                  }),
+                )
+              }),
+            )
+          }
+          Promise.all(jobs).then(go, go)
+        }
+
+        function isAppAsset(url) {
+          if (!url) return false
+          try {
+            var u = new URL(url, location.href)
+            return (
+              u.origin === location.origin &&
+              u.pathname.indexOf('/assets/') !== -1
+            )
+          } catch (e) {
+            return String(url).indexOf('/assets/') !== -1
+          }
+        }
+
+        window.addEventListener(
+          'error',
+          function (event) {
+            var t = event.target
+            if (t && t !== window) {
+              var src = t.src || t.href
+              if (isAppAsset(src)) {
+                event.preventDefault()
+                hardReload()
+              }
+              return
+            }
+            if (event.filename && isAppAsset(event.filename)) hardReload()
+          },
+          true,
+        )
+
+        window.addEventListener('unhandledrejection', function (event) {
+          var reason = event.reason
+          var msg =
+            reason && (reason.message || (typeof reason === 'string' ? reason : ''))
+          if (
+            msg &&
+            typeof CHUNK_ERROR_RE !== 'undefined' &&
+            CHUNK_ERROR_RE.test(msg)
+          ) {
+            event.preventDefault()
+            hardReload()
+          }
+        })
+
+        /* Volver con el botón Atrás (bfcache) no debe rehidratar un shell roto. */
+        window.addEventListener('pageshow', function (event) {
+          if (event.persisted) location.reload()
+        })
+
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.addEventListener('controllerchange', function () {
+            try {
+              if (sessionStorage.getItem(CTRL_KEY) === '1') return
+              sessionStorage.setItem(CTRL_KEY, '1')
+            } catch (e) {}
+            location.reload()
+          })
+          navigator.serviceWorker.getRegistration().then(function (reg) {
+            if (!reg) return
+            try {
+              reg.update()
+            } catch (e) {}
+            if (reg.waiting) {
+              try {
+                reg.waiting.postMessage({ type: 'SKIP_WAITING' })
+              } catch (e) {}
+            }
+          })
+        }
+
+        window.setTimeout(function () {
+          try {
+            sessionStorage.removeItem(HARD_KEY)
+            sessionStorage.removeItem(CTRL_KEY)
+          } catch (e) {}
+        }, 20000)
+      })()
+    </script>
+    <!--
+      Shell mínimo inline: FCP no debe esperar al CSS/JS de Vite.
+      React sustituye #root al montar.
+    -->
+    <style>html,body{color:#c8d0d8;background:#12181e;min-height:100dvh;margin:0;font-family:system-ui,Segoe UI,sans-serif}:is(#root:has(>#boot),#root:has(>.boot-lcp)){box-sizing:border-box;min-height:100dvh;padding:env(safe-area-inset-top,0px) env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px);justify-content:center;align-items:center;display:flex}#boot,.boot-lcp{letter-spacing:-.04em;text-align:center;color:#1a1f24;margin:0;padding:0 1.25rem;font-size:clamp(2.8rem,11vw,3.6rem);font-weight:800;line-height:1}html[data-theme=dark] #boot,html[data-theme=dark] .boot-lcp,html.has-wallpaper #boot,html.has-wallpaper .boot-lcp{color:#fff}#app-wallpaper-layer{z-index:0;pointer-events:none;background-color:#000;background-position:50% 0;background-repeat:no-repeat;background-size:cover;position:fixed;inset:0}#app-wallpaper-layer:after{content:"";background:rgba(0, 0, 0, var(--wallpaper-veil-opacity,.38));position:absolute;inset:0}html.has-wallpaper #root{z-index:1;background-color:#0000;position:relative}</style>
+    <script type="module" crossorigin src="/stud.io_Distribution/assets/index-BnUJCAND.js"></script>
+    <link rel="modulepreload" crossorigin href="/stud.io_Distribution/assets/rolldown-runtime-XKyaHtl9.js">
+    <link rel="modulepreload" crossorigin href="/stud.io_Distribution/assets/react-C1iE8mnY.js">
+    <link rel="stylesheet" crossorigin href="/stud.io_Distribution/assets/index-DN5n5Udx.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" crossorigin href="/stud.io_Distribution/assets/index-DN5n5Udx.css"></noscript>
+  <link rel="manifest" href="/stud.io_Distribution/manifest.webmanifest"></head>
+  <body>
+    <script>
+      try {
+        var dark = localStorage.getItem('estud.io:theme') === 'dark'
+        var wallpaperOn =
+          localStorage.getItem('estud.io:wallpaper-active') === '1'
+        /* Light → gris app + texto negro. Dark / foto → negro + texto blanco. */
+        var chrome = wallpaperOn || dark ? '#000000' : '#dbdbdb'
+        var ink = wallpaperOn || dark ? '#ffffff' : '#1a1f24'
+        if (dark) document.documentElement.setAttribute('data-theme', 'dark')
+        if (wallpaperOn)
+          document.documentElement.classList.add('has-wallpaper')
+        var veilLast = localStorage.getItem('estud.io:wallpaper-veil-last')
+        if (veilLast && wallpaperOn) {
+          document.documentElement.style.setProperty(
+            '--wallpaper-veil-opacity',
+            veilLast,
+          )
+        }
+        document.documentElement.style.backgroundColor = chrome
+        document.body.style.backgroundColor = chrome
+        document.body.style.color = ink
+        var m = document.querySelector('meta[name="theme-color"]')
+        if (m) m.setAttribute('content', chrome)
+
+        /* Precarga temprana del fondo (LCP): no esperar a React/IDB. */
+        var APP_BASE = '/stud.io_Distribution/'
+        if (APP_BASE.slice(-1) !== '/') APP_BASE += '/'
+        var CLOUDINARY_CLOUD_NAME="dy3fejf8g";var CLOUDINARY_FOLDER="estud.io/Wallpapers";var CLOUDINARY_PUBLIC_ID_SUFFIX_RE=/\.(jpe?g|png|gif|webp|avif|bmp|svg|tiff?)$/i;
+        var WALLPAPER_PRESET_FILES={"cactus":"cld:cactus-9726574_1280","lake":"cld:lake","peaks-lake":"cld:peaks-lake","dolomites":"cld:pexels-photo-25352950","norway":"cld:norway","totoro":"cld:i-made-a-set-of-totoro-wallpaper-for-pc-and-mobile-phone-v0-aqhyo4zoqiqb1","ghibli":"cld:estud.io/Wallpapers/Ghibli/GHIBLI","sorolla-madre":"cld:sorolla-madre","sargent-lake":"cld:sargent-lake","sargent-simplon":"cld:simplon_pass_2014.79.31_1","klimt-beech":"cld:klimt-beech","marquet-eucalyptus":"cld:marquet-eucalyptus","monet-argenteuil":"cld:monet-w222","rousseau-lion":"cld:rousseau-lion","haes-mancorbo":"cld:La_Canal_de_Mancorbo_en_los_Picos_de_Europa_1","vanderhamen-bodegon":"cld:Bodegón_con_gavilán_aves_porcelana_y_conchas_1","still-1965":"cld:1982.36_1965-ph-578","dufy-palmera":"cld:CTB.1987.21_0","murakami-flower":"cld:GalleriesNow-Gagosian-MURAK_2024.0012_DET_3-Murakami-article-D-Nov-2024","harvard-abstract":"cld:_BrWNorl0LiM.max-4800x4800"};
+
+        function cloudinaryBootDeliveryUrl(publicId) {
+          if (
+            !publicId ||
+            typeof CLOUDINARY_CLOUD_NAME === 'undefined' ||
+            !CLOUDINARY_CLOUD_NAME
+          )
+            return null
+          var pid = publicId
+          if (
+            pid.indexOf('/') < 0 &&
+            typeof CLOUDINARY_FOLDER !== 'undefined' &&
+            CLOUDINARY_FOLDER
+          ) {
+            pid = CLOUDINARY_FOLDER + '/' + pid
+          }
+          var encoded = pid
+            .split('/')
+            .map(function (seg) {
+              return encodeURIComponent(seg)
+            })
+            .join('/')
+          /*
+           * public_id con sufijo .jpg/.png/…: Cloudinary lo toma como formato
+           * y 404. Delimitar con otra extensión (f_auto elige el real).
+           */
+          if (
+            typeof CLOUDINARY_PUBLIC_ID_SUFFIX_RE !== 'undefined' &&
+            CLOUDINARY_PUBLIC_ID_SUFFIX_RE.test(pid)
+          ) {
+            encoded += '.jpg'
+          }
+          return (
+            'https://res.cloudinary.com/' +
+            CLOUDINARY_CLOUD_NAME +
+            '/image/upload/f_auto,q_auto:good,w_1080,c_limit/' +
+            encoded
+          )
+        }
+
+        function resolveWallpaperBootUrl(raw) {
+          if (!raw || typeof raw !== 'string') return null
+          if (raw.indexOf('data:') === 0) return raw
+          if (
+            raw.indexOf('http://') === 0 ||
+            raw.indexOf('https://') === 0
+          )
+            return raw
+          if (raw.indexOf('cld:') === 0)
+            return cloudinaryBootDeliveryUrl(raw.slice(4))
+          if (raw.indexOf('preset:') === 0) {
+            var hint =
+              typeof WALLPAPER_PRESET_FILES !== 'undefined'
+                ? WALLPAPER_PRESET_FILES[raw.slice(7)]
+                : null
+            return hint ? resolveWallpaperBootUrl(hint) : null
+          }
+          if (raw.indexOf('/') === 0) return raw
+          /* Ruta local wallpapers/… */
+          if (raw.indexOf('wallpapers/') === 0) return APP_BASE + raw
+          return APP_BASE + raw.replace(/^\//, '')
+        }
+
+        function applyEarlyWallpaper(url) {
+          if (!url || !wallpaperOn) return
+          if (!document.getElementById('app-wallpaper-preload')) {
+            var preload = document.createElement('link')
+            preload.id = 'app-wallpaper-preload'
+            preload.rel = 'preload'
+            preload.as = 'image'
+            preload.href = url
+            preload.fetchPriority = 'high'
+            document.head.appendChild(preload)
+          }
+          var layer = document.getElementById('app-wallpaper-layer')
+          if (!layer) {
+            layer = document.createElement('div')
+            layer.id = 'app-wallpaper-layer'
+            layer.setAttribute('aria-hidden', 'true')
+            document.body.insertBefore(layer, document.body.firstChild)
+          }
+          layer.style.backgroundImage = 'url(' + JSON.stringify(url) + ')'
+        }
+
+        var bootSrc = localStorage.getItem('estud.io:wallpaper-src')
+        var earlyUrl = bootSrc ? resolveWallpaperBootUrl(bootSrc) : null
+        if (earlyUrl) applyEarlyWallpaper(earlyUrl)
+
+        /* Fallback: IDB en paralelo (perfil con fondo pero sin clave LS nueva). */
+        if (wallpaperOn && typeof indexedDB !== 'undefined') {
+          var openReq = indexedDB.open('estud.io-wallpaper', 1)
+          openReq.onupgradeneeded = function () {
+            var db = openReq.result
+            if (!db.objectStoreNames.contains('wallpaper'))
+              db.createObjectStore('wallpaper')
+          }
+          openReq.onsuccess = function () {
+            try {
+              var db = openReq.result
+              var tx = db.transaction('wallpaper', 'readonly')
+              var getReq = tx.objectStore('wallpaper').get('current')
+              getReq.onsuccess = function () {
+                var raw = getReq.result
+                var url = resolveWallpaperBootUrl(raw)
+                if (!url) return
+                if (
+                  typeof raw === 'string' &&
+                  raw.indexOf('preset:') === 0 &&
+                  typeof WALLPAPER_PRESET_FILES !== 'undefined'
+                ) {
+                  var file = WALLPAPER_PRESET_FILES[raw.slice(7)]
+                  if (file) {
+                    try {
+                      localStorage.setItem('estud.io:wallpaper-src', file)
+                    } catch (err) {}
+                  }
+                }
+                applyEarlyWallpaper(url)
+              }
+              tx.oncomplete = function () {
+                db.close()
+              }
+            } catch (err) {}
+          }
+        }
+      } catch (e) {}
+    </script>
+    <div id="root"><p id="boot">estud.io</p></div>
+  </body>
+</html>

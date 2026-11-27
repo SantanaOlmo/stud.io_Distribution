@@ -1,0 +1,1 @@
+function e(){let e=`/stud.io_Distribution/`;return e.endsWith(`/`)?e:`${e}/`}function t(){let t=e().replace(/\/$/,``);return t===``?void 0:t}export{t as n,e as t};

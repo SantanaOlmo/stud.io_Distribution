@@ -1,0 +1,1 @@
+import{t as e}from"./react-C1iE8mnY.js";var t=e();function n({className:e=``,invalid:n=!1,type:r=`text`,...i}){let a=[`input`,n?`input--invalid`:``,e].filter(Boolean).join(` `);return(0,t.jsx)(`input`,{type:r,className:a,...i})}export{n as t};

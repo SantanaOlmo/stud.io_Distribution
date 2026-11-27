@@ -1,0 +1,1 @@
+import{t as e}from"./types-wDT3_nPj.js";var t=e;function n(){return t||`local`}function r(e){t=e||`local`}export{r as n,n as t};

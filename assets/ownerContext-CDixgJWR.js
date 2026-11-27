@@ -1,0 +1,1 @@
+import{a as e}from"./database-vrFJY7xs.js";async function t(){return e()}export{t};
